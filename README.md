@@ -1,24 +1,19 @@
-# FlowForge
+import asyncio
 
-A lightweight Python toolkit for building simple, reliable asynchronous workflows.
+from flowforge import Workflow
 
-## Why FlowForge?
 
-Modern applications often need to run tasks in the background, process data through multiple steps, and handle asynchronous operations.
+async def main():
+    workflow = Workflow()
 
-FlowForge provides a small and simple API for connecting these operations into reusable workflows.
+    workflow.add(lambda value: value + 1)
+    workflow.add(lambda value: value * 2)
 
-## Features
+    result = await workflow.run(10)
 
-- Simple workflow API
-- Supports synchronous functions
-- Supports asynchronous functions
-- Chain multiple processing steps
-- Lightweight with minimal dependencies
-- Fully open source
-- Easy to test and extend
+    print(result.value)
+    # 22
 
-## Installation
 
-```bash
-pip install flowforge
+asyncio.run(main())
+
